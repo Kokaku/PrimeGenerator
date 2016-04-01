@@ -37,19 +37,13 @@ void listenKeyboard() {
 void generatePrime() {
     State* state = new State();
     Chunck* chunck;
-    Chunck* cChunck;
     while(c != 'q') {
         int currentChunck = state->getNextChunck();
         chunck = new Chunck(currentChunck);
         for (int i = 0; i < currentChunck; ++i) {
-            cChunck = new Chunck(i);
             if(c == 'q')
                 cout << i << "/" << currentChunck-1 << endl;
-            while(cChunck->hasNextPrime()) {
-                unsigned long long next = cChunck->getNextPrime();
-                chunck->resolve(next);
-            }
-            delete cChunck;
+            chunck->resolveChunck(i);
         }
         chunck->resolve();
         chunck->write();

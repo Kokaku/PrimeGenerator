@@ -8,7 +8,7 @@ State::State() {
         stateFile = new std::fstream(filename, std::fstream::in | std::fstream::out | std::fstream::binary);
         stateFile->seekp(0);
         stateFile->read((char*)(&completed), sizeof(completed));
-        std::cout<<completed<<" chucks completed."<<std::endl;
+        std::cout<<(completed+1)<<" chucks completed."<<std::endl;
     } else {
         stateFile = new std::fstream(filename, std::fstream::in | std::fstream::out | std::fstream::app | std::fstream::binary);
         this->writeState();

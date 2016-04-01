@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
         std::cerr << "Failed to create directory " << sPath << ".\n";
         return -1;
     }
-
+    
     std::thread keyboard(listenKeyboard);
     std::thread generate(generatePrime);
 

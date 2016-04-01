@@ -2,30 +2,29 @@
 #define CHUNCK_H
 
 #include <iostream>
-#include <gmpxx.h>
 using namespace std;
 
 class Chunck {
 public:
-    Chunck(mpz_class number);
+    Chunck(unsigned long long number);
     ~Chunck();
-    void resolveChunck(mpz_class primeChuckNum);
+    void resolveChunck(unsigned long long primeChuckNum);
     void resolve();
     void write();
     bool hasNextPrime();
-    mpz_class getNextPrime();
+    unsigned long long getNextPrime();
 
 private:
-    void resolve(mpz_class prime);
+    void resolve(unsigned long long prime);
     void readBuffer();
     bool getPrimeFromPos(unsigned long pos);
     void findNextPrime();
-    mpz_class number;
+    unsigned long long number;
     string filename;
     char* buffer;
-    mpz_class firstnumber;
-    mpz_class nextPrime;
-    unsigned long readPos;
+    unsigned long long firstnumber;
+    unsigned long long nextPrime;
+    long readPos;
 };
 
 #endif // CHUNCK_H

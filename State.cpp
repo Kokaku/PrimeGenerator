@@ -7,6 +7,7 @@ State::State() {
     if(fexists(filename)) {
         stateFile = new std::fstream(filename, std::fstream::in | std::fstream::out | std::fstream::binary);
         stateFile->seekp(0);
+        std::cout << sizeof(completed) << std::endl;
         stateFile->read((char*)(&completed), sizeof(completed));
         std::cout<<(completed+1)<<" chucks completed."<<std::endl;
     } else {
@@ -24,12 +25,12 @@ State::~State() {
 }
 
 void State::inc() {
-    completed++;
+    ++completed;
     std::cout<<"Completed : "<<completed<<std::endl;
     this->writeState();
 }
 
-int State::getNextChunck() {
+long long State::getNextChunck() {
     return completed+1;
 }
 

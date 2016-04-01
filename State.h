@@ -10,13 +10,13 @@ public:
     State();
     ~State();
     void inc();
-    int getNextChunck();
+    long long getNextChunck();
 private:
     void writeState();
 
     std::fstream* stateFile;
-    int completed;
-    std::map <int, int> chunckState;
+    long long completed;
+    std::map <long long, long long> chunckState;
 };
 
 #endif // STATE_H

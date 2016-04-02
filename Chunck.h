@@ -9,12 +9,12 @@ public:
     Chunck(unsigned long long number);
     ~Chunck();
     void resolveChunck(unsigned long long primeChuckNum);
-    void resolve();
     void write();
     bool hasNextPrime();
     unsigned long long getNextPrime();
 
 private:
+    void resolve();
     void resolve(unsigned long long prime);
     void readBuffer();
     bool getPrimeFromPos(unsigned long pos);
@@ -23,7 +23,7 @@ private:
     string filename;
     char* buffer;
     unsigned long long firstnumber;
-    unsigned long long nextPrime;
+    long long nextPrime;
     long readPos;
 };
 

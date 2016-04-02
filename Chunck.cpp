@@ -31,10 +31,14 @@ void Chunck::readBuffer() {
 }
 
 void Chunck::resolveChunck(unsigned long long primeChuckNum) {
-    Chunck primeChuck (primeChuckNum);
-    while(primeChuck.hasNextPrime()) {
-        unsigned long long next = primeChuck.getNextPrime();
-        this->resolve(next);
+    if(primeChuckNum == number) {
+        this->resolve();
+    } else {
+        Chunck primeChuck (primeChuckNum);
+        while(primeChuck.hasNextPrime()) {
+            unsigned long long next = primeChuck.getNextPrime();
+            this->resolve(next);
+        }
     }
 }
 

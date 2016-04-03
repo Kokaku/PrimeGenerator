@@ -1,5 +1,8 @@
 #include "State.h"
 
+/*
+    @author Kokaku
+*/
 static const std::string FILENAME = "data/state";
 
 State::State() {
@@ -64,11 +67,11 @@ long long State::getChunckState(unsigned long long chunckId) {
     return chunckState[chunckId];
 }
 
-void State::setChunckState(unsigned long long chunckId, unsigned long long status) {
-    chunckState[chunckId] = status;
+void State::setChunckState(unsigned long long chunckId, unsigned long long state) {
+    chunckState[chunckId] = state;
     if(completed+1 == chunckId) {
         long long checkChunckId = chunckId;
-        long long checkState = status;
+        long long checkState = state;
         while(checkState >= checkChunckId/2) {
             chunckState.erase(checkChunckId);
             ++completed;
@@ -105,12 +108,12 @@ void State::writeState() {
     unsigned long long mapSize = chunckState.size();
     stateFile.write((char*)(&mapSize), sizeof(mapSize));
     unsigned long long chunckId = completed+1;
-    long long status = getChunckState(chunckId);
-    while(status >= 0) {
-        unsigned long long uStatus = (unsigned long long)status;
-        stateFile.write((char*)(&uStatus), sizeof(unsigned long long));
+    long long state = getChunckState(chunckId);
+    while(state >= 0) {
+        unsigned long long uState = (unsigned long long)state;
+        stateFile.write((char*)(&uState), sizeof(unsigned long long));
         ++chunckId;
-        status = getChunckState(chunckId);
+        state = getChunckState(chunckId);
     }
     stateFile.close();
 }

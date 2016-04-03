@@ -5,7 +5,19 @@
 #include <chrono>
 #include <omp.h>
 
-bool createResultDir(std::string sPath);
+/*
+    This programm generate prime numbers up to 2^64 (size of unsigned long long)
+    The method of computation is inspired by the sieve of Eratosthenes.
+    However, the work is splited in Chuncks and Tasks in order to be parallelizable.
+
+    Create two threads.
+    One that listen to the keyboard and tell the program to stop generate tasks once the programm termination is asked.
+    A second one that read the previous state on the disk and continue the prime generation.
+    The prime generation is additionally parallelized with OpenMP.
+
+    @author Kokaku
+*/
+
 void listenKeyboard();
 void generatePrime();
 char c = '0';

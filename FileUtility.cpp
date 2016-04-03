@@ -1,5 +1,8 @@
 #include "FileUtility.h"
 
+/*
+    @author Kokaku
+*/
 bool fexists(const std::string filename) {
   std::ifstream ifile(filename.c_str());
     if (ifile.good()) {

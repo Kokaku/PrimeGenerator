@@ -1,11 +1,11 @@
-#include "State.h"
 #include "Chunck.h"
-#include <thread>
 
-void listenKeyboard();
-void generatePrime();
-char c = '0';
+/*
+    Alternative main class that read completed chuncks
+    And print the last prime number of each chunck and its corresponding id
 
+    @author Kokaku
+*/
 int main(int argc, char *argv[])
 {
     unsigned long long primeID = 1;

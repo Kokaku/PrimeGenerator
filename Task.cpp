@@ -1,5 +1,8 @@
 #include "Task.h"
 
+/*
+    @author Kokaku
+*/
 Task::Task(unsigned long long proccedChunckFrom, unsigned long long proccedChunckTo,
     unsigned long long primeChunckFrom, unsigned long long primeChunckTo):
     proccedChunckFrom(proccedChunckFrom), proccedChunckTo(proccedChunckTo),
@@ -14,6 +17,7 @@ Task::~Task() {
 void Task::execute() {
     for(unsigned long long proccedChunckId = proccedChunckFrom; proccedChunckId < proccedChunckTo; ++proccedChunckId) {
         Chunck chunck (proccedChunckId);
+        // Only proccess up to chunck = id/2 since the first multiple of any number is at least 2 times itself
         unsigned long long primeChunckLimit = primeChunckTo<=proccedChunckId/2 ? primeChunckTo : proccedChunckId/2;
         for (unsigned long long primeChunckId = primeChunckFrom; primeChunckId <= primeChunckLimit; ++primeChunckId) {
             chunck.resolveChunck(primeChunckId);

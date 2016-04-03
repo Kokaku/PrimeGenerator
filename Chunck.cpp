@@ -1,11 +1,16 @@
 #include "Chunck.h"
 #include "FileUtility.h"
 
+// First number represented on the first chunck
 #define FIRST_NUMBER 3
+// Chunck size in bytes
 #define BUFFER_SIZE 4194304
-//#define BUFFER_SIZE 10
+// Mask for bytes
 #define MASK 0xFF
 
+/*
+    @author Kokaku
+*/
 Chunck::Chunck(unsigned long long number):number(number) {
     filename = "data/chunck"+std::to_string(number)+".bin";
     firstnumber = FIRST_NUMBER + number*BUFFER_SIZE*8*2;
@@ -31,6 +36,8 @@ void Chunck::readBuffer() {
 }
 
 void Chunck::resolveChunck(unsigned long long primeChuckNum) {
+    // If the given arg is the chunck id then call the specialized method to proccess itself
+    // Otherwise read each prime number in the given chunck and process each read prime number.
     if(primeChuckNum == number) {
         this->resolve();
     } else {
@@ -43,6 +50,7 @@ void Chunck::resolveChunck(unsigned long long primeChuckNum) {
 }
 
 void Chunck::resolve(unsigned long long prime) {
+    // index is the index of the first number in the chunck that is a multiple of the given prime number
     unsigned long long index = firstnumber / prime;
     if(firstnumber%prime != 0)
         index++;
@@ -54,8 +62,12 @@ void Chunck::resolve(unsigned long long prime) {
     else if(index%2 == 0)
         index += prime;
     index -= firstnumber;
+    // end is the last index of the chunck
     unsigned long end = BUFFER_SIZE * 8;
+
+    // Remove each multiple of the given prime in this chunck
     for(unsigned long i = index/2; i<end; i+=prime) {
+        // bufferIndex is the index of the byte in the buffer corresponding to a multiple of the given prime number
         unsigned long bufferIndex = i/8;
         buffer[bufferIndex] = buffer[bufferIndex]&(1<<(i%8)^MASK);
     }
